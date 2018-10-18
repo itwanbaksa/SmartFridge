@@ -13,8 +13,8 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+//import java.io.ObjectInputStream;
+//import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class MainActivity extends Activity {
@@ -45,13 +45,6 @@ public class MainActivity extends Activity {
             }
         });
 
-    }
-
-    public void onButtonConnect(View v) {
-        Log.e("wan", "onButtonConnect is called!!!");
-        //todo :: 서버와 연결 요청
-        connectThread = new ConnectThread();
-        connectThread.start();
     }
 
     class ConnectThread extends Thread {
@@ -95,7 +88,15 @@ public class MainActivity extends Activity {
         }
     }
 
-    //=============START 음식 넣기 ==================================================================
+//    냉장고 연결하기
+    public void onButtonConnect(View v) {
+        Log.e("wan", "onButtonConnect is called!!!");
+        //todo :: 서버와 연결 요청
+        connectThread = new ConnectThread();
+        connectThread.start();
+    }
+
+//    음식 넣기
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -106,5 +107,4 @@ public class MainActivity extends Activity {
         // result.getContents()   : 바코드 값
         Toast.makeText(getApplicationContext(), result.getContents(), Toast.LENGTH_LONG).show();
     }
-    //=============END 음식 넣기 ==================================================================
 }
