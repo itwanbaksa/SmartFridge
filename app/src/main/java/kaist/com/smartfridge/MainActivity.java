@@ -64,18 +64,22 @@ public class MainActivity extends Activity {
             try {
                 Log.e("wan", "ConnectThread :: connect is called!!!");
                 printLog("냉장고에 접속을 시도합니다.");
-                Socket socket = new Socket("210.89.160.88", 80);
-                ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-                oos.writeUTF("클라이언트 접속 요청...");
-                oos.flush();
-                printLog("서버에 접속을 요청하는 중입니다..");
+                Socket socket = new Socket("210.89.160.88", 80);  //www.naver.com
+                boolean result = socket.isConnected() && !socket.isClosed();
+                if (result) {
+                    printLog("냉장고와 연결되었습니다.");
+                } else {
+                    printLog("냉장고와의 연결이 실패했습니다.");
+                }
 
-                Log.e("wan", "ConnectThread :: 1");
-                ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-                Log.e("wan", "ConnectThread :: 2");
-                String data = ois.readUTF();
-                Log.e("wan", "ConnectThread :: 3");
-                printLog("서버가 보낸 메세지: " + data);
+//                ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+//                oos.writeUTF("클라이언트 접속 요청...");
+//                oos.flush();
+//                printLog("서버에 접속을 요청하는 중입니다..");
+
+//                ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+//                String data = ois.readUTF();
+//                printLog("서버가 보낸 메세지: " + data);
             } catch (Exception e) {
                 e.printStackTrace();
             }
